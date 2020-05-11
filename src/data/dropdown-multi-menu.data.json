@@ -1,0 +1,54 @@
+[
+    {
+        "title": "HR",
+        "submenu": null
+    },
+    {
+        "title": "Tech",
+        "submenu": [
+            {
+                "title": "Dev",
+                "submenu": [
+                    {
+                        "title": "Javascript",
+                        "submenu": null
+                    },
+                    {
+                        "title": "Java",
+                        "submenu": null
+                    }
+                ]
+            },
+            {
+                "title": "Database",
+                "submenu": [
+                    {
+                        "title": "MySql",
+                        "submenu": null
+                    },
+                    {
+                        "title": "Mongo",
+                        "submenu": null
+                    }
+                ]
+            },
+            {
+                "title": "QA",
+                "submenu": [
+                    {
+                        "title": "Manual",
+                        "submenu": null
+                    },
+                    {
+                        "title": "Automation",
+                        "submenu": null
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Other",
+        "submenu": null
+    }
+]

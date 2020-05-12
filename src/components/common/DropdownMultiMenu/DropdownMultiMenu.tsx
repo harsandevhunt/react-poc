@@ -1,5 +1,5 @@
 import React, { createRef } from "react";
-import { AiFillCaretRight } from "react-icons/ai"
+import { AiFillCaretRight, AiOutlineCheck } from "react-icons/ai"
 import "./DropdownMultiMenu.scss";
 interface props {
 	data: [];
@@ -31,13 +31,14 @@ class DropdownMultiMenu extends React.Component<props, state> {
 
 	getMenuItem = (menuItem: any, depthLevel: any, index: any) => {
 		let title = this.getMenuItemTitle(menuItem, index, depthLevel);
-
+		let selItem:any;
 		if (menuItem.submenu && menuItem.submenu.length > 0) {
+			selItem = (this.state.selectedItem || this.props.selectedItem);
 			return (
 				<li
 					key={title + index}
 					className={
-						this.state.selectedItem === title ? "active" : ""
+						selItem === title ? "active" : ""
 					}
 				>
 					{title}
@@ -45,19 +46,22 @@ class DropdownMultiMenu extends React.Component<props, state> {
 					<DropdownMultiMenu
 						data={menuItem.submenu}
 						submenu={true}
-						selectedItem={this.state.selectedItem}
+						selectedItem={selItem}
 					/>
 				</li>
 			);
 		} else {
+			selItem = (this.state.selectedItem || this.props.selectedItem);
+			let selIcon = <AiOutlineCheck className="li-icon selected"/>;
 			return (
 				<li
 					key={title + index}
 					className={
-						this.state.selectedItem === title ? "active" : ""
+						selItem === title ? "active" : ""
 					}
 				>
 					{title}
+					{(selItem === title?selIcon:'')}
 				</li>
 			);
 		}

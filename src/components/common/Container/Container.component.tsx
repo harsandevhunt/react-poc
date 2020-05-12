@@ -8,7 +8,7 @@ import Components from '../../../pages/components';
 
 const Container = ()=>{
     return (
-        <div className="main-container">
+        <div className="container-xl">
             <Router>
               <Home path="/" />
               <About path="/about" />

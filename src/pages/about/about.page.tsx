@@ -4,7 +4,7 @@ import './about.scss';
 
 const About = (props: RouteComponentProps) => {
     return (
-        <div>
+        <div className="text-center">
             <h2>About</h2>
         </div>
     );

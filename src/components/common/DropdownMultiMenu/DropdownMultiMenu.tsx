@@ -16,6 +16,7 @@ interface state {
 }
 
 class DropdownMultiMenu extends React.Component<props, state> {
+	static componentName = 'DropdownMultiMenu';
 	node:any;
 	constructor(props: props) {
 		super(props);

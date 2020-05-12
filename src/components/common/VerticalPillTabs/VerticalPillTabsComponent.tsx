@@ -23,11 +23,14 @@ export default class VerticalPillTabsComponent extends Component {
 					return child
 				  }
 				// To get Component Name of Child Component
-				_.forOwn(child,function(val,key){
-					if(key === 'type'){
-						title = _.startCase(val['name']);
-					}
-				});
+				title = _.get(child, 'type.componentName');
+				title = (title)?title:'CustomComponent';
+				console.log('Component Name is:',title);
+				// _.forOwn(child,function(val,key){
+				// 	if(key === 'type'){
+				// 		title = _.startCase(val['name']);
+				// 	}
+				// });
 				// Format the Component Props based propertyies
 				if(child.props.active){
 					this.selected = title+i;

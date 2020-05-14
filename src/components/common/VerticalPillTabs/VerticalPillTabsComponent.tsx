@@ -105,7 +105,7 @@ export default class VerticalPillTabsComponent extends Component {
 									</Accordion.Toggle>
 									<Accordion.Collapse eventKey="0">
 										<Card.Body>
-										<Tab.Content className="height-250">
+										<Tab.Content className="min-height-250">
 											{tabPane}
 										</Tab.Content>
 										</Card.Body>

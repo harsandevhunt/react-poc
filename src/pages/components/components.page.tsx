@@ -4,6 +4,7 @@ import './components.scss';
 import DropdownMultiMenu from  '../../components/common/DropdownMultiMenu';
 import VerticalPillComponent from '../../components/common/VerticalPillTabs'
 import loadData from '../../data/dropdown-multi-menu.data.json';
+import DropdownMenu from '../../components/common/DropdownMenu';
 
 const dropDownData:any = loadData;
 const Components = (props:RouteComponentProps)=> {
@@ -13,7 +14,7 @@ const Components = (props:RouteComponentProps)=> {
             <div>
                 <VerticalPillComponent>
                     <DropdownMultiMenu multi={true} active={true} domKey="1" title="Select Department" data={dropDownData}/>
-                    {/* <DropdownMultiMenu active={true} domKey="2" title="Select User" data={dropDownData}/> */}
+                    <DropdownMenu active={true} multi={true} domKey="2" title="Select Department" data={dropDownData}/>
                 </VerticalPillComponent>
             </div>
         </div>

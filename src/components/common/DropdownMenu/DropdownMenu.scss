@@ -1,0 +1,134 @@
+//Variable
+$elem-width : 150px;
+$elem-height: 35px;
+.dropdown-menu-component{
+    .dropdown-btn{
+        width: $elem-width;
+        height: 40px;
+        font-size: 15px;
+        display: inline-block;
+        padding: 0px;
+        margin: 0px;
+        box-shadow: 0px 0px 1px;
+        .dropdown-btn-head{
+            max-width:90%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            display: inline-block;
+        }
+        .dropdown-btn-icon{
+            max-width: 10%;
+            color: grey;
+            position: relative;
+            float: right;
+            font-size: 20px;
+        }
+    }
+    .select-item{
+        border: 1px solid lightgray;
+        border-radius: 10px;
+        padding: 2px 15px;
+        margin: 5px;
+        font-size: 12px;
+        display: inline-block;
+        cursor: pointer;
+        text-shadow: 1px 0px 6px black;
+        box-shadow: 2px 2px 5px grey ;
+    }
+    .closeLabel{
+        float: right;
+        position: relative;
+        right: 15px;
+        top: 3px;
+        cursor: pointer;
+    }
+    .li-icon{
+        color: grey;
+        position: absolute;
+        margin:calc(12% - 0.59em) 0px 0px;
+        font-size: 12px;
+        right: 5px;
+    }
+    
+    .dropdown-container{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .dropdown-custom-menu {
+        height: auto;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: blue;
+        cursor: pointer;
+        position: absolute;
+        background: white;
+        display: block;
+        z-index: 2;
+        ul{
+            padding:0px !important;
+            background: white;
+        }
+        ul,li{
+            width: $elem-width;
+        }
+        li {
+            float: left;
+            clear: both;
+            position: relative;
+            display: inline-block;
+            width: $elem-width;
+            line-height: $elem-height;
+            height: $elem-height;
+            text-decoration: none;
+            border-radius: 2px;
+            border:1px solid grey;
+            background: white;
+        }
+        
+        
+        li li a {
+            font-size: 12px;
+        }
+        
+        li li{
+            margin: -1px;
+        }
+        
+        li:hover,.active {
+            background: grey;
+            color: white;
+            & ul{
+                color: blue;
+            }
+        }
+        //Direct immediate child of List item hover for svg icon
+        li:hover > svg, li:hover .selected,li.active .selected{
+            color: white;
+        }
+        
+        ul {
+            position: relative;
+            left: $elem-width;
+            top: -$elem-height;
+            display: none;
+        }
+        
+        li:hover ul ul {
+            display: none;
+        }
+        
+        li:hover ul {
+            display: block;
+        }
+        li li:hover ul {
+            display: block;
+        }
+    
+    }
+}

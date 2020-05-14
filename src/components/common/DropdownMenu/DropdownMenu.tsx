@@ -1,7 +1,7 @@
 import React, { createRef } from "react";
-import { AiFillCaretRight, AiOutlineCheck } from "react-icons/ai";
+import { AiFillCaretRight, AiOutlineCheck, AiOutlineCaretDown } from "react-icons/ai";
 import _ from 'lodash';
-import "./DropdownMultiMenu.scss";
+import "./DropdownMenu.scss";
 interface props {
 	data: [];
 	submenu?: any;
@@ -17,8 +17,8 @@ interface state {
 	selectedItem?: any;
 }
 
-class DropdownMultiMenu extends React.Component<props, state> {
-	static componentName = 'DropdownMultiMenu';
+class DropdownMenu extends React.Component<props, state> {
+	static componentName = 'DropdownMenu';
 	node:any;
 	constructor(props: props) {
 		super(props);
@@ -56,7 +56,7 @@ class DropdownMultiMenu extends React.Component<props, state> {
 				>
 					{title}
 					<AiFillCaretRight className="li-icon"/>
-					<DropdownMultiMenu
+					<DropdownMenu
 						multi={multiFlag}
 						data={menuItem.submenu}
 						submenu={true}
@@ -84,9 +84,9 @@ class DropdownMultiMenu extends React.Component<props, state> {
 	toggleMenu = (action?:any) => {
 		let displayValue = '';
 		if(action)
-			displayValue = (action === 'show')?'flex':'none';
+			displayValue = (action === 'show')?'block':'none';
 		else
-			displayValue = this.state.styleObj.display === "none" ? "flex" : "none";
+			displayValue = this.state.styleObj.display === "none" ? "block" : "none";
 		this.setState({ styleObj: { display: displayValue } });
 	};
 
@@ -114,15 +114,19 @@ class DropdownMultiMenu extends React.Component<props, state> {
 				this.toggleMenu('hide');
 		}else if(
 			event.target.innerHTML &&
-			event.target.innerHTML.indexOf("li-icon selected") > -1 && this.props.multi){
-				let { selectedItem } = this.state;
-				let item = event.target.innerText;
-				selectedItem.splice(selectedItem.indexOf(item),1);
-				this.setState({selectedItem: selectedItem});
-		}else if(
-			event.target.innerHTML &&
-			event.target.innerHTML.indexOf("li-icon selected") > -1 && !this.props.multi){
-				this.setState({selectedItem: ''});
+			event.target.innerHTML.indexOf("li-icon selected") > -1){
+				this.removeItem(event);
+		}
+	};
+
+	removeItem = (event:any)=>{
+		if(this.props.multi){
+			let { selectedItem } = this.state;
+			let item = event.target.innerText;
+			selectedItem.splice(selectedItem.indexOf(item),1);
+			this.setState({selectedItem: selectedItem});
+		}else{
+			this.setState({selectedItem: ''});
 		}
 	};
 
@@ -154,29 +158,33 @@ class DropdownMultiMenu extends React.Component<props, state> {
 		if (this.props.submenu && this.props.submenu === true)
 			return <ul className="sub">{options}</ul>;
 
-		let titleBlock = "";
+		let titleBlock = "Select";
 		if (this.props.title) {
 			titleBlock = this.props.title;
 		}
 
 		let selectedTxt:any;
-		if(this.props.multi && _.isArray(this.state.selectedItem))
-			selectedTxt = this.state.selectedItem.join();
-		else
+		if(this.props.multi && _.isArray(this.state.selectedItem)){
+			selectedTxt = this.state.selectedItem.map((item,i)=>{
+				return (
+				<div className="select-item" key={i} onClick={this.removeItem}>{item}</div>
+				)
+			});
+		}else{
 			selectedTxt = this.state.selectedItem;
-
+		}
 		return (
-			<div className="dropdown-multimenu">
+			<div className="dropdown-menu-component">
 				<div className="dropdown-container">
 					<div>
 						<label>Selected : </label> {selectedTxt}
 					</div>
 					<div ref={node => this.node = node}>
 						<button
-							className="dropdown-toggle"
+							className="dropdown-btn"
 							onClick={this.toggleMenu}
 						>
-							{titleBlock ? <div>{titleBlock}</div> : ""}
+							<div className="dropdown-btn-head">{titleBlock}</div><AiOutlineCaretDown className="dropdown-btn-icon"/>
 						</button>
 						<ul
 							id="dropdown-custom-menu"
@@ -195,4 +203,4 @@ class DropdownMultiMenu extends React.Component<props, state> {
 	};
 }
 
-export default DropdownMultiMenu;
+export default DropdownMenu;

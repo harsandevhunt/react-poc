@@ -1,99 +1,103 @@
-.dropdown-custom-menu {
-    height: auto;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: blue;
-    cursor: pointer;
-    position: absolute;
-    background: white;
-    display: flex;
-    z-index: 2;
-    flex-direction: column;
-    ul{
-        padding:0px !important;
-        background: white;
-    }
-    ul,li{
-        width: 150px;
-    }
-    li {
-        display: inline-block;
-        position: relative;
-        display: inline-block;
-        width: 150px;
-        line-height: 35px;
-        text-decoration: none;
-        border-radius: 2px;
-        border:1px solid grey;
-    }
-    
-    
-    li li a {
-        font-size: 12px;
-    }
-    
-    li li{
-        margin: -1px;
-    }
-    
-    li:hover,.active {
-        background: grey;
-        color: white;
-        & ul{
-            color: blue;
-        }
-    }
-    //Direct immediate child of List item hover for svg icon
-    li:hover > svg, li:hover .selected,li.active .selected{
-        color: white;
-    }
-    
-    ul {
+.dropdown-multimenu{
+    .dropdown-custom-menu {
+        height: auto;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        color: blue;
+        cursor: pointer;
         position: absolute;
-        left: 150px;
-        top: 0px;
-        display: none;
+        background: white;
+        display: flex;
+        z-index: 2;
+        flex-direction: column;
+        ul{
+            padding:0px !important;
+            background: white;
+        }
+        ul,li{
+            width: 150px;
+        }
+        li {
+            display: inline-block;
+            position: relative;
+            display: inline-block;
+            width: 150px;
+            line-height: 35px;
+            text-decoration: none;
+            border-radius: 2px;
+            border:1px solid grey;
+        }
+        
+        
+        li li a {
+            font-size: 12px;
+        }
+        
+        li li{
+            margin: -1px;
+        }
+        
+        li:hover,.active {
+            background: grey;
+            color: white;
+            & ul{
+                color: blue;
+            }
+        }
+        //Direct immediate child of List item hover for svg icon
+        li:hover > svg, li:hover .selected,li.active .selected{
+            color: white;
+        }
+        
+        ul {
+            position: absolute;
+            left: 150px;
+            top: 0px;
+            display: none;
+        }
+        
+        li:hover ul ul {
+            display: none;
+        }
+        
+        li:hover ul {
+            display: block;
+        }
+        li li:hover ul {
+            // margin-left: 150px;
+            // margin-top: -35px;
+            display: block;
+        }
+    
     }
     
-    li:hover ul ul {
-        display: none;
+    
+    .dropdown-toggle{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 40px;
+        font-size: 15px;
+    }
+    nu-li {
+        padding: 10px;
     }
     
-    li:hover ul {
-        display: block;
+    .dropdown-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
     }
-    li li:hover ul {
-        // margin-left: 150px;
-        // margin-top: -35px;
-        display: block;
+    .li-icon{
+        color: grey;
+        position: absolute;
+        margin:calc(12% - 0.59em) 0px 0px;
+        font-size: 12px;
+        right: 5px;
     }
-
-}
-
-
-.dropdown-toggle{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 150px;
-    height: 40px;
-    font-size: 15px;
-}
-nu-li {
-    padding: 10px;
-}
-
-.dropdown-container{
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-}
-.li-icon{
-    color: grey;
-    position: absolute;
-    margin:calc(12% - 0.59em) 0px 0px;
-    font-size: 12px;
-    right: 5px;
 }

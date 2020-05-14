@@ -1,18 +1,20 @@
 import React, { createRef } from "react";
-import { AiFillCaretRight, AiOutlineCheck } from "react-icons/ai"
+import { AiFillCaretRight, AiOutlineCheck } from "react-icons/ai";
+import _ from 'lodash';
 import "./DropdownMultiMenu.scss";
 interface props {
 	data: [];
 	submenu?: any;
-	selectedItem?: string;
+	selectedItem?: any;
 	title?: string;
 	domKey?:string;
 	active?:boolean;
+	multi?:boolean;
 }
 
 interface state {
 	styleObj: any;
-	selectedItem?: string;
+	selectedItem?: any;
 }
 
 class DropdownMultiMenu extends React.Component<props, state> {
@@ -32,18 +34,30 @@ class DropdownMultiMenu extends React.Component<props, state> {
 	getMenuItem = (menuItem: any, depthLevel: any, index: any) => {
 		let title = this.getMenuItemTitle(menuItem, index, depthLevel);
 		let selItem:any;
+		let multiFlag:boolean = false;
+		function checkSelItem(sel:any,tit:string):boolean{
+			let resp = false;
+			if(_.isArray(sel) && sel.indexOf(tit) > -1){
+				resp = true;
+			}else if(_.isString(sel) && sel === tit){
+				resp = true;
+			}
+			return resp;
+		}
 		if (menuItem.submenu && menuItem.submenu.length > 0) {
 			selItem = (this.state.selectedItem || this.props.selectedItem);
+			multiFlag = (this.props.multi)?true:false;
 			return (
 				<li
 					key={title + index}
 					className={
-						selItem === title ? "active" : ""
+						checkSelItem(selItem,title) ? "active" : ""
 					}
 				>
 					{title}
 					<AiFillCaretRight className="li-icon"/>
 					<DropdownMultiMenu
+						multi={multiFlag}
 						data={menuItem.submenu}
 						submenu={true}
 						selectedItem={selItem}
@@ -57,11 +71,11 @@ class DropdownMultiMenu extends React.Component<props, state> {
 				<li
 					key={title + index}
 					className={
-						selItem === title ? "active" : ""
+						checkSelItem(selItem,title) ? "active" : ""
 					}
 				>
 					{title}
-					{(selItem === title?selIcon:'')}
+					{(checkSelItem(selItem,title)?selIcon:'')}
 				</li>
 			);
 		}
@@ -86,9 +100,29 @@ class DropdownMultiMenu extends React.Component<props, state> {
 			event.target.innerHTML.indexOf("<") === -1
 		) {
 			let selectedTxt = event.target.innerText;
-			console.log("Selected value is : ", selectedTxt);
-			this.setState({ selectedItem: selectedTxt });
-			this.toggleMenu('hide');
+			let selObj = (this.state.selectedItem || []);
+			if(this.props.multi){
+				if(_.isArray(selObj))
+					selObj.push(selectedTxt);
+				else
+					selObj = [selectedTxt];
+			}
+			else
+				selObj = selectedTxt
+			this.setState({ selectedItem: selObj });
+			if(!this.props.multi)
+				this.toggleMenu('hide');
+		}else if(
+			event.target.innerHTML &&
+			event.target.innerHTML.indexOf("li-icon selected") > -1 && this.props.multi){
+				let { selectedItem } = this.state;
+				let item = event.target.innerText;
+				selectedItem.splice(selectedItem.indexOf(item),1);
+				this.setState({selectedItem: selectedItem});
+		}else if(
+			event.target.innerHTML &&
+			event.target.innerHTML.indexOf("li-icon selected") > -1 && !this.props.multi){
+				this.setState({selectedItem: ''});
 		}
 	};
 
@@ -98,10 +132,8 @@ class DropdownMultiMenu extends React.Component<props, state> {
 		if(this.node.contains(e.target) && e.target.tagName === 'LI'){
 			return;
 		}else if(this.node.contains(e.target)){
-			console.log('Yes! It contains');
 			this.toggleMenu('show');
 		}else{
-			console.log('No! It doesn\'t contains');
 			this.toggleMenu('hide');
 		}
 
@@ -127,10 +159,16 @@ class DropdownMultiMenu extends React.Component<props, state> {
 			titleBlock = this.props.title;
 		}
 
+		let selectedTxt:any;
+		if(this.props.multi && _.isArray(this.state.selectedItem))
+			selectedTxt = this.state.selectedItem.join();
+		else
+			selectedTxt = this.state.selectedItem;
+
 		return (
 			<div className="dropdown-container">
 				<div className="dropdown-container-body">
-					<label>Selected : </label> {this.state.selectedItem}
+					<label>Selected : </label> {selectedTxt}
 					<br></br>
 					<div ref={node => this.node = node}>
 						<button

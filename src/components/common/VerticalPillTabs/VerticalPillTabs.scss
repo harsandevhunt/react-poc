@@ -1,19 +1,26 @@
-.custom-container {
-	height: calc(100vh - 150px);
-}
-
-.tab-content-container{
-    border: 1px solid lightblue;
-}
-.accordion .card-header{
-    cursor: pointer;
-}
-.height-250{
-    min-height: 250px;
-}
-.pretty-custom{
-    background: lightblue;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.4);
+.vertical-pill-tabs{
+    .custom-container {
+        height: calc(100vh - 150px);
+    }
+    
+    .tab-content-container{
+        border: 1px solid lightblue;
+    }
+    .accordion .card-header{
+        cursor: pointer;
+    }
+    .height-250{
+        min-height: 250px;
+    }
+    .pretty-custom{
+        background: lightblue;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 20px 10px rgba(0, 0, 0, 0.4);
+    }
+    //Fix for the Accordion collapse overflow issue with dropdown 
+    .accordion .card {
+        overflow: inherit !important;
+    }
+    
 }

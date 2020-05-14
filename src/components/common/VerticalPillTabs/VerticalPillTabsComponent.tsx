@@ -81,9 +81,8 @@ export default class VerticalPillTabsComponent extends Component {
 				</Tab.Pane>
 			);
 		});
-		console.log(config);
 		return (
-			<div className="custom-container">
+			<div className="vertical-pill-tabs custom-container">
 				<Tab.Container
 					id="left-tabs-example"
 					defaultActiveKey={this.selected}

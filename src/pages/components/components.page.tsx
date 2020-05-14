@@ -12,7 +12,7 @@ const Components = (props:RouteComponentProps)=> {
             <h2 className="text-center">Components</h2>
             <div>
                 <VerticalPillComponent>
-                    <DropdownMultiMenu active={true} domKey="1" title="Select Department" data={dropDownData}/>
+                    <DropdownMultiMenu multi={true} active={true} domKey="1" title="Select Department" data={dropDownData}/>
                     {/* <DropdownMultiMenu active={true} domKey="2" title="Select User" data={dropDownData}/> */}
                 </VerticalPillComponent>
             </div>

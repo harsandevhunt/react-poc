@@ -184,7 +184,7 @@ class DropdownMenu extends React.Component<props, state> {
 							className="dropdown-btn"
 							onClick={this.toggleMenu}
 						>
-							<div className="dropdown-btn-head">{titleBlock}</div><AiOutlineCaretDown className="dropdown-btn-icon"/>
+							<div className="dropdown-btn-head" title={titleBlock}>{titleBlock}</div><AiOutlineCaretDown className="dropdown-btn-icon"/>
 						</button>
 						<ul
 							id="dropdown-custom-menu"
